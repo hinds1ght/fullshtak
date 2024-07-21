@@ -1,0 +1,75 @@
+<h1><%=title%></h1>
+<form method="post">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input 
+            id="title"
+            name="title"
+            class="form-control"
+            type="text"
+            placeholder="Name of book"
+            required
+            value="<%= typeof book==='undefined' ? '' : book.title%>">
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <select class="form-control" name="author" id="author" required>
+            <option value="">--Please select an author--</option>
+            <% authors.forEach((author)=>{%>
+                <% if(book){%>
+                    <% if(author._id.toString()===book.author._id.toString()){%>
+                        <option value="<%= author._id%>" selected><%= author.name%></option>
+                    <%}else{%>
+                        <option value="<%= author._id%>" selected><%= author.name%></option>
+                    <%}%>
+                <%}else{%>
+                    <option value="<%= author._id%>" selected><%= author.name%></option>
+                <%}%>
+            <%})%>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="summary">Summary:</label>
+        <textarea class="form-control" name="summary" id="summary" cols="30" rows="10"
+            placeholder="Summary" required><%= typeof book==='undefined' ? '' : book.summary%></textarea>
+    </div>
+    <div class="form-group">
+        <label for="isbn">ISBN:</label>
+        <input name="isbn" class="form-control" id="isbn" type="text" placeholder="ISBN13" 
+            required value="<%= typeof book==='undefined' ? '' : book.isbn%>">
+    </div>
+    <div class="form-group">
+        <label>Genre:</label>
+        <div>
+            <% genres.forEach((genre)=>{%>
+                <div style="display: inline; padding-right:10px;">
+                    <% if(genre.checked){%>
+                        <input class="checkbox-input" 
+                               type="checkbox"
+                               name="genre"
+                               id="<%= genre._id%>"
+                               value="<%= genre._id%>"
+                               checked>
+                               <label for="<%=genre._id%>">&nbsp;<%=genre.name%></label>
+                    <%}else{%>
+                        <input class="checkbox-input" 
+                               type="checkbox"
+                               name="genre"
+                               id="<%= genre._id%>"
+                               value="<%= genre._id%>">
+                    <label for="<%=genre._id%>">&nbsp;<%=genre.name%></label>
+                    <%}%>
+                </div>
+            <%})%>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<% if(errors){%>
+    <ul>
+        <% errors.forEach((error)=>{%>
+            <li><%=error.msg%></li>    
+        <%})%>    
+    </ul>    
+<%}%>
