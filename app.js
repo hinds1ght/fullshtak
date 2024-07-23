@@ -1,11 +1,11 @@
 var createError = require('http-errors');
 var express = require('express');
+require('dotenv').config()
 
   // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://admin:asakapapre@cluster0.3ynwssb.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0";
-
+const mongoDB = process.env.DATABASE_KEY
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
