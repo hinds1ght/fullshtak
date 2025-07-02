@@ -54,4 +54,19 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+app.set('port', port);
+
+const server = http.createServer(app);
+
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+server.on('error', (err) => {
+  console.error('Server error:', err);
+});
+
 module.exports = app;

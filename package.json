@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
-    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+    "start": "node app.js",
+    "devstart": "nodemon app.js",
+    "serverstart": "node app.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
